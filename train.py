@@ -46,8 +46,8 @@ mse = mean_squared_error(y_test, y_pred)
 r2 = r2_score(y_test, y_pred)
 
 # Print metrics (IMPORTANT)
-print(f"MSE: {mse}")
-print(f"R2 Score: {r2}")
+print(f"MSE : {mse}")
+print(f"R2 Score : {r2}")
 
 # Save model
 joblib.dump(model, MODEL_PATH)
