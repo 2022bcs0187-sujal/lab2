@@ -14,8 +14,8 @@ MODEL_PATH = "Output/model/model.joblib"
 RESULTS_PATH = "Output/results/results.json"
 
 # Create output directories
-os.makedirs("output/model", exist_ok=True)
-os.makedirs("output/results", exist_ok=True)
+os.makedirs("Output/model", exist_ok=True)
+os.makedirs("Output/results", exist_ok=True)
 
 # Load dataset
 df = pd.read_csv(DATA_PATH, sep=';')
