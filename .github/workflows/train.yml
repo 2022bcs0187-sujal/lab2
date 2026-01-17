@@ -1,0 +1,45 @@
+name: Wine Quality Training Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Run training script
+      run: |
+        python train.py | tee output.log
+
+    - name: Write Job Summary
+      run: |
+        echo "## Wine Quality Experiment Results" >> $GITHUB_STEP_SUMMARY
+        echo "**Name:** Sujal Chodvadiya" >> $GITHUB_STEP_SUMMARY
+        echo "**Roll No:** 2022BCS0187" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Metrics" >> $GITHUB_STEP_SUMMARY
+        cat output/results/results.json >> $GITHUB_STEP_SUMMARY
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: experiment-artifacts
+        path: |
+          output/model/
+          output/results/
