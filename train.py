@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error, r2_score
 import joblib
-from sklearn.linear_model import Ridge
+from sklearn.ensemble import GradientBoostingRegressor
 # Paths
 DATA_PATH = "Dataset/winequality-red.csv"
 MODEL_PATH = "Output/model/model.joblib"
@@ -34,7 +34,12 @@ X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
 # Model
-model = Ridge(alpha=1.0)
+model = GradientBoostingRegressor(
+    n_estimators=200,
+    learning_rate=0.05,
+    max_depth=4,
+    random_state=42
+)
 model.fit(X_train, y_train)
 
 # Predictions
