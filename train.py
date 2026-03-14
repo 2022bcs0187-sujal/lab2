@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error, r2_score
 import joblib
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.linear_model import LinearRegression
 # Paths
 DATA_PATH = "Dataset/winequality-red.csv"
 MODEL_PATH = "Output/model/model.joblib"
@@ -34,14 +34,7 @@ X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
 # Model
-model = RandomForestRegressor(
-    n_estimators=300,
-    max_depth=20,
-    min_samples_split=2,
-    min_samples_leaf=1,
-    random_state=42,
-    n_jobs=-1
-)
+model = LinearRegression()
 model.fit(X_train, y_train)
 
 # Predictions
